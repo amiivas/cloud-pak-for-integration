@@ -47,9 +47,9 @@ time=0
 while [[ acedsn -eq 0 ]]; do
 
 	if [ $time -gt 5 ]; then
-      		echo "Timed-out : ACE Designer Installation failed.."
-      		exit 1
-    	fi
+    echo "Timed-out : ACE Designer Installation failed.."
+    exit 1
+  fi
 	
 	oc get pods -n ${namespace} | grep ${release_name} | grep Running 
 	resp=$?

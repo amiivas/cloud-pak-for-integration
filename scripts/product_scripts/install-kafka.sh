@@ -76,9 +76,9 @@ time=0
 while [[ kafka -eq 0 ]]; do
 
 	if [ $time -gt 5 ]; then
-      		echo "Timed-out : Kafka Installation failed.."
-      		exit 1
-    	fi
+    echo "Timed-out : Kafka Installation failed.."
+    exit 1
+  fi
 	
 	oc get pods -n ${namespace} | grep ${release_name} | grep kafka | grep Running | grep 1/1
 	resp=$?
@@ -95,9 +95,9 @@ done
 while [[ zookeeper -eq 0 ]]; do
 
 	if [ $time -gt 5 ]; then
-      		echo "Timed-out : Kafka Installation failed.."
-      		exit 1
-    	fi
+    echo "Timed-out : Kafka Installation failed.."
+    exit 1
+  fi
 	
 	oc get pods -n ${namespace} | grep ${release_name} | grep zookeeper | grep Running | grep 1/1
 	resp=$?
