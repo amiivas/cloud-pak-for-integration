@@ -2,6 +2,15 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+	"userEmail": {
+	    "type": "string",
+	    "minLength": 3,
+	    "maxLength": 320,
+	    "defaultValue": "",
+	    "format": "idn-email",
+	    "pattern": "^\\S*$",
+	    "metadata": { "description": "The email id of the user, we will send installation updates on this too!" }
+	},
         "_artifactsLocation": {
             "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/amiivas/cloud-pak-for-integration/main/",
