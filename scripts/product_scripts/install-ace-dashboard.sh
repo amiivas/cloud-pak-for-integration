@@ -13,7 +13,7 @@ ARROW=$'\xE2\x86\xAA  '
 TICK=$'\xe2\x9c\x85 '
 WARN=$'\xE2\x9A\xA0  '
 CROSS=$'\xe2\x9d\x8c '
-INFO=$'\xE2\x93\x98  '
+INFO=$'\xE2\x84\xB9  '
 
 SUCCESSFUL="successful"
 FAILED="failed"
@@ -35,7 +35,7 @@ function divider() {
 function script_notify() {
   local status=$1
   sh email-notify.sh "${cluster_name}" "${domain_name}" "${release_name}" "${namespace}" "${user_email}" "${status}"
-  if [ "$status" == FAILED ]; then
+  if [ "$status" == ${FAILED} ]; then
     divider
     exit 1
   fi

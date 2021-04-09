@@ -7,7 +7,6 @@ export namespace=$4
 export notify_email=$5
 export install_status=$6
 
-MAIL=
 TIME_FORMAT="%Y-%m-%d_%H-%M-%S"
 
 email_regex="^[a-z0-9!#\$%&'*+/=?^_\`{|}~-]+(\.[a-z0-9!#$%&'*+/=?^_\`{|}~-]+)*@([a-z0-9]([a-z0-9-]*[a-z0-9])?\.)+[a-z0-9]([a-z0-9-]*[a-z0-9])?\$"
@@ -20,8 +19,8 @@ if [[ ${notify_email} =~ $regex ]] ; then
   STATEMENT_COLOR="2ae261"
   if [[ "$install_status" != "successful" ]] 
   then
-      STATEMENT="We ran into a problem while installing ${release_name}. Please look for the logs which may specify failure reason."
-      STATEMENT_COLOR="df1d1d"
+    STATEMENT="We ran into a problem while installing ${release_name}. Please look for the logs which may specify failure reason."
+    STATEMENT_COLOR="df1d1d"
   fi
 
 # trigger email using curl
@@ -33,7 +32,7 @@ curl --ssl \
 --upload-file - <<EOF
 From: IPM CP4I <noreply@ipmcp4i.com>
 To: ${notify_email}
-Subject: CP4I Installation Status - ${release_name}
+Subject: CP4I Installation Status - ${release_name} - ${install_status}
 Content-Type: multipart/related; boundary="Boundary"
 
 --Boundary

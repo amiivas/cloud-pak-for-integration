@@ -31,7 +31,7 @@ ARROW=$'\xE2\x86\xAA  '
 TICK=$'\xe2\x9c\x85 '
 WARN=$'\xE2\x9A\xA0  '
 CROSS=$'\xe2\x9d\x8c '
-INFO=$'\xE2\x93\x98  '
+INFO=$'\xE2\x84\xB9  '
 
 SUCCESSFUL="successful"
 FAILED="failed"
@@ -53,7 +53,7 @@ function divider() {
 function script_notify() {
   local status=$1
   sh email-notify.sh "${cluster_name}" "${domain_name}" "${release_name}" "${namespace}" "${user_email}" "${status}"
-  if [ "$status" == FAILED ]; then
+  if [ "$status" == ${FAILED} ]; then
     divider
     exit 1
   fi
@@ -75,9 +75,9 @@ echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Preparing to setup an Integration 
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Tracing is currently set to ${tracing_enabled}"
 
 # Initialize environmental setup
-echo "$INFO INFO: $(date +${TIME_FORMAT}) :: Setting config secret for SMTP..."
+echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Setting config secret for SMTP..."
 var=0
-oc create secret generic ${configName} --from-literal=configuration=c210cDo6Y29uZmlnU01UUCAtdSA4MzA4MDdiZDkyNDVhMyAtcCA5OWRhZWNkZWM1Nzc4ZQ== --namespace="${namespace}"
+oc create secret generic "${configName}" --from-literal=configuration=c210cDo6Y29uZmlnU01UUCAtdSA4MzA4MDdiZDkyNDVhMyAtcCA5OWRhZWNkZWM1Nzc4ZQ== --namespace="${namespace}"
 var=$?
 echo "$INFO exit code: $var"
 
@@ -155,7 +155,7 @@ while [[ acedb -eq 0 ]]; do
   oc get integrationservers -n "${namespace}" | grep ${release_name} | grep Ready
   resp=$?
   if [[ resp -ne 0 ]]; then
-    echo -e "$WARN INFO:  $(date +${TIME_FORMAT}) :: No running ACE Integration Server found for ${release_name} Waiting..."
+    echo -e "$WARN WARN:  $(date +${TIME_FORMAT}) :: No running ACE Integration Server found for ${release_name} Waiting..."
     time=$((time + 1))
     sleep 60
   else
