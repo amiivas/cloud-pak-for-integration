@@ -478,7 +478,7 @@ EOF
     echo "INFO: Installing Capability App Connect Designer";
     curl ${productInstallationPath}/install-ace-designer.sh -o install-ace-designer.sh
     chmod +x install-ace-designer.sh
-    sh install-ace-designer.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace}
+    sh install-ace-designer.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${user_email}
   fi
 
   

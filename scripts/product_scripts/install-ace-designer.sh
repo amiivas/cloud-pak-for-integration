@@ -5,6 +5,7 @@ export domain_name=$2
 export openshift_user=$3
 export openshift_password=$4
 export namespace=$5
+export user_email=$6
 
 # Declaring variables
 SECONDS=0
