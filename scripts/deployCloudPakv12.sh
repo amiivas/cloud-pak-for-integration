@@ -446,6 +446,7 @@ EOF
   chmod +x email-notify.sh
 
   echo "INFO: CP4I Installed Successfully on project ${namespace}"
+  echo "${capabilityOperationsDashboard} + ${capabilityAPIConnect}"
 
   if [[ "$capabilityOperationsDashboard" == "true" ]]
   then
@@ -454,7 +455,7 @@ EOF
     wait_for_product OperationsDashboard operations-dashboard
   fi
 
-  if [[ "$capabilityAPIConnect" == "true" ]]
+  if [[ "$capabilityAPIConnect" == "True" ]]
   then
     echo "INFO: Installing Capability API Connect";
     curl ${productInstallationPath}/install-apic.sh -o install-apic.sh
@@ -462,7 +463,7 @@ EOF
     sh install-apic.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${productInstallationPath}
   fi
 
-  if [[ "$capabilityAPPConnectDashboard" == "true" ]]
+  if [[ "$capabilityAPPConnectDashboard" == "True" ]]
   then
     echo "INFO: Installing Runtime App Connect Dashboard";
     curl ${productInstallationPath}/install-ace-dashboard.sh -o install-ace-dashboard.sh
@@ -472,7 +473,7 @@ EOF
     sh install-ace-dashboard.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${user_email}
   fi
 
-  if [[ "$capabilityAPPConenctDesigner" == "true" ]]
+  if [[ "$capabilityAPPConenctDesigner" == "True" ]]
   then
     echo "INFO: Installing Capability App Connect Designer";
     curl ${productInstallationPath}/install-ace-designer.sh -o install-ace-designer.sh
@@ -489,7 +490,7 @@ EOF
     sh install-assetrepo.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} latest ${storageAccountName}
   fi
   
-  if [[ "$runtimeMQ" == "true" ]]
+  if [[ "$runtimeMQ" == "True" ]]
   then
     echo "INFO: Installing Runtime MQ";
     curl ${productInstallationPath}/install-mq.sh -o install-mq.sh
@@ -499,7 +500,7 @@ EOF
   fi
   
   
-  if [[ "$runtimeKafka" == "true" ]]
+  if [[ "$runtimeKafka" == "True" ]]
   then
     echo "INFO: Installing Runtime Kafka..";
     curl ${productInstallationPath}/install-kafka.sh -o install-kafka.sh
