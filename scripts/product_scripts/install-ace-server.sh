@@ -41,6 +41,7 @@ release_name="ace-is"
 replicas="1"
 ace_policy_names="L-APEH-BPUCJK"
 tracing_enabled="false"
+configName="mymailtrap"
 
 # divider func will draw a line to make the logs section more distinct, easier to read
 function divider() {
@@ -71,6 +72,25 @@ echo "$INFO exit code: $var"
 # Purpose of the script
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Preparing to setup an Integration Server ${release_name} on ACE in ${namespace}..."
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Tracing is currently set to ${tracing_enabled}"
+
+# Initialize environmental setup
+echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Setting config secret for SMTP..."
+var=0
+oc create secret generic ${configName} --from-literal=configuration=c210cDo6Y29uZmlnU01UUCA4MzA4MDdiZDkyNDVhMyA5OWRhZWNkZWM1Nzc4ZQ== --namespace="${namespace}"
+var=$?
+echo "$INFO exit code: $var"
+
+# Validate if secret was created [only if trace is "true"]
+time=0
+while ! oc get secrets ${configName} -n "${namespace}"; do
+  echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Waiting for the secret ${configName} to get created"
+  if [ $time -gt 30 ]; then
+    echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Secret ${configName} yet to be created in ${namespace}, creating secret..."
+    break
+    time=$((time + 1))
+  fi
+  sleep 10
+done
 
 # Installing Integration Server configuration YAML
 cat << EOF | oc apply -f -
@@ -129,13 +149,14 @@ fi
 
 # Validate installation
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Validating ACE Integration Server ${release_name} setup..."
+sleep 60
 acedb=0
 time=0
 
 # Maximum wait time for Integration Server to be up and running is 5*60 seconds
 while [[ acedb -eq 0 ]]; do
   # Maximum retries - 5 times
-  if [ $time -gt 6 ]; then
+  if [ $time -gt 5 ]; then
     echo "$CROSS ERROR: $(date +${TIME_FORMAT}) :: Timed-out : ACE Integration Server ${release_name} setup ${FAILED}..."
     script_notify ${FAILED}
   fi
