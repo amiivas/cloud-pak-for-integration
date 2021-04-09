@@ -39,10 +39,8 @@ TIME_FORMAT="%Y-%m-%d_%H-%M-%S"
 
 release_name="ace-is"
 replicas="1"
-ace_policy_names="L-APEH-BY5CY7"
+ace_policy_names="L-APEH-BPUCJK"
 tracing_enabled="false"
-
-configName="myMailtrap"
 
 # divider func will draw a line to make the logs section more distinct, easier to read
 function divider() {
@@ -74,15 +72,18 @@ echo "$INFO exit code: $var"
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Preparing to setup an Integration Server ${release_name} on ACE in ${namespace}..."
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Tracing is currently set to ${tracing_enabled}"
 
-# Initialize environmental setup
-echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Setting config secret for SMTP..."
-var=0
-oc create secret generic "${configName}" --from-literal=configuration=c210cDo6Y29uZmlnU01UUCAtdSA4MzA4MDdiZDkyNDVhMyAtcCA5OWRhZWNkZWM1Nzc4ZQ== --namespace="${namespace}"
-var=$?
-echo "$INFO exit code: $var"
-
 # Installing Integration Server configuration YAML
 cat << EOF | oc apply -f -
+apiVersion: appconnect.ibm.com/v1beta1
+kind: Configuration
+metadata:
+  name: smtp-conf
+  namespace: ${namespace}
+spec:
+  data: c210cDo6Y29uZmlnU01UUCA4MzA4MDdiZDkyNDVhMyA5OWRhZWNkZWM1Nzc4ZQ==
+  description: mqsisetdbparms SMTP
+  type: setdbparms
+---
 apiVersion: appconnect.ibm.com/v1beta1
 kind: IntegrationServer
 metadata:
@@ -91,8 +92,9 @@ metadata:
 spec:
   adminServerSecure: false
   barURL: ''
-  configurations: ["${configName}"]
+  configurations: ["smtp-conf"]
   designerFlowsOperationMode: disabled
+  disableRoutes: false
   license:
     accept: true
     license: ${ace_policy_names}
@@ -114,7 +116,7 @@ spec:
     endpointType: http
   useCommonServices: true
   version: ${ace_version}
-  logFormat: basic
+  logFormat: json
   tracing:
     enabled: ${tracing_enabled}
     namespace: ${namespace}
@@ -125,20 +127,6 @@ if [[ "$?" != "0" ]]; then
   script_notify ${FAILED}
 fi
 
-# Validate if secret was created [only if trace is "true"]
-time=0
-if [ "$tracing_enabled" == "true" ]; then
-  while ! oc get secrets ${configName} -n "${namespace}"; do
-    echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Waiting for the secret ${configName} to get created"
-    if [ $time -gt 30 ]; then
-      echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Secret ${configName} didn't get created in ${namespace}, creating secret..."
-      break
-      time=$((time + 1))
-    fi
-    sleep 10
-  done
-fi
-
 # Validate installation
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Validating ACE Integration Server ${release_name} setup..."
 acedb=0
@@ -147,7 +135,7 @@ time=0
 # Maximum wait time for Integration Server to be up and running is 5*60 seconds
 while [[ acedb -eq 0 ]]; do
   # Maximum retries - 5 times
-  if [ $time -gt 5 ]; then
+  if [ $time -gt 6 ]; then
     echo "$CROSS ERROR: $(date +${TIME_FORMAT}) :: Timed-out : ACE Integration Server ${release_name} setup ${FAILED}..."
     script_notify ${FAILED}
   fi
