@@ -2,11 +2,11 @@
     "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
-    "userEmail": {
-        "type": "string",
-        "defaultValue": "",
-        "metadata": { "description": "The email id of the user(s), we will send installation updates! \";\" separated multiple email IDs can be entered e.g. john.doe@mail.com;jane.doe@mail.com " }
-    },
+        "userEmail": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": { "description": "The email id of the user(s), we will send installation updates! \";\" separated multiple email IDs can be entered e.g. john.doe@mail.com;jane.doe@mail.com " }
+        },
         "_artifactsLocation": {
             "type": "string",
             "defaultValue": "https://raw.githubusercontent.com/amiivas/cloud-pak-for-integration/main/",
