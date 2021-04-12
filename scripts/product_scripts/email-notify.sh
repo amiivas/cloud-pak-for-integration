@@ -41,7 +41,17 @@ if [[ ${notify_email} =~ $email_regex ]] ; then
     STATEMENT_COLOR="df1d1d"
     STATEMENT_COLOR="ca1111"
     STATUS_LOGO="&#10060;"
-    attachment_section="\n\n--Boundary\nContent-Type: text/plain\nContent-Transfer-Encoding: base64\nContent-Disposition: inline; filename=${log_file}\nContent-ID: CP4I_on_Azure_Installation_Log\n\n$(base64 -w 0 ${log_file})\n\n"
+    attachment_section="
+
+--Boundary
+Content-Type: text/plain
+Content-Transfer-Encoding: base64
+Content-Disposition: inline; filename=${log_file}
+Content-ID: CP4I_on_Azure_Installation_Log
+
+$(base64 -w 0 ${log_file})
+
+"
   fi
 
   html_body="--upload-file - <<EOF
