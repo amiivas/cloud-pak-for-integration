@@ -87,7 +87,7 @@ Content-ID: CP4I_on_Azure_Installation_Status
 </head>
 
 <body>
-    <div class="container" style="background:#e8e8e8; min-height:97vh; font-family: Segoe UI, Helvetica, Arial, sans-serif;  color:#444444; font-size:14px; padding: 10px;">
+    <div class="container" style="background:#e8e8e8; min-height:fit-content; font-family: Segoe UI, Helvetica, Arial, sans-serif;  color:#444444; font-size:14px; padding: 10px;">
         <table border="0" cellpadding="0" cellspacing="0" width="100%" class="">
             <tr>
                 <td style="background: #e8e8e8;"></td>
