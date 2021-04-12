@@ -4,9 +4,8 @@
     "parameters": {
     "userEmail": {
         "type": "string",
-        "maxLength": 320,
         "defaultValue": "",
-        "metadata": { "description": "The email id of the user, we will send installation updates on this too!" }
+        "metadata": { "description": "The email id of the user(s), we will send installation updates! \";\" separated multiple email IDs can be entered e.g. john.doe@mail.com;jane.doe@mail.com " }
     },
         "_artifactsLocation": {
             "type": "string",

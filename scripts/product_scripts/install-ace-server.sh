@@ -97,7 +97,6 @@ while ! oc get secrets ${configName} -n "${namespace}"; do
 done
 
 # Installing Integration Server configuration YAML
-{
 cat << EOF | oc apply -f -
 apiVersion: appconnect.ibm.com/v1beta1
 kind: Configuration
@@ -146,7 +145,6 @@ spec:
     enabled: ${tracing_enabled}
     namespace: ${namespace}
 EOF
-} | 2>&1 | tee -a ${LOG_FILE}
 
 if [[ "$?" != "0" ]]; then
   echo -e "$CROSS ERROR: $(date +${TIME_FORMAT}) :: Failed to apply Integration Server Configurations..." 2>&1 | tee -a ${LOG_FILE}

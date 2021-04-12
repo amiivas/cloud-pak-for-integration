@@ -59,7 +59,6 @@ echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Installing ACE Designer in ${names
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Tracing is currently set to ${tracing_enabled}" 2>&1 | tee -a ${LOG_FILE}
 
 # Installing App Connect Designer configuration YAML
-{
 cat << EOF | oc apply -f -
 apiVersion: appconnect.ibm.com/v1beta1
 kind: DesignerAuthoring
@@ -82,7 +81,6 @@ spec:
   useCommonServices: true
   version: 11.0.0
 EOF
-} | 2>&1 | tee -a ${LOG_FILE}
 
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Validating ACE Designer installation..." 2>&1 | tee -a ${LOG_FILE}
 acedsn=0
@@ -109,7 +107,6 @@ while [[ acedsn -eq 0 ]]; do
 done
 
 # Setting up Integration Server for App Connect Designer configuration YAML
-{
 cat << EOF | oc apply -f -
 apiVersion: appconnect.ibm.com/v1beta1
 kind: IntegrationServer
@@ -134,7 +131,7 @@ spec:
   configurations:
     - des-quickstart-designer-sc
 EOF
-} | 2>&1 | tee -a ${LOG_FILE}
+
 echo -e "$TICK INFO:  $(date +${TIME_FORMAT}) :: ACE IntegrationServer creation ${SUCCESSFUL}..." 2>&1 | tee -a ${LOG_FILE}
 echo -e "$INFO INFO:  $(date +${TIME_FORMAT}) :: ACE Designer setup took $(($SECONDS / 60 / 60 % 24)) hour(s) $(($SECONDS / 60 % 60)) minutes and $(($SECONDS % 60)) seconds." 2>&1 | tee -a ${LOG_FILE}
 divider

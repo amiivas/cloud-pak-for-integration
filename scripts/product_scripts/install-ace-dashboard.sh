@@ -60,7 +60,6 @@ echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Installing ACE Dashboard in ${name
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Tracing is currently set to ${tracing_enabled}" 2>&1 | tee -a ${LOG_FILE}
 
 # Installing App Connect Dashboard configuration YAML
-{
 cat << EOF | oc apply -f -
 apiVersion: appconnect.ibm.com/v1beta1
 kind: Dashboard
@@ -91,7 +90,6 @@ spec:
   useCommonServices: true
   version: ${ace_version}
 EOF
-} | 2>&1 | tee -a ${LOG_FILE}
 
 # Validate installation
 echo "$INFO INFO:  $(date +${TIME_FORMAT}) :: Validating ACE Dashboard installation..." 2>&1 | tee -a ${LOG_FILE}
