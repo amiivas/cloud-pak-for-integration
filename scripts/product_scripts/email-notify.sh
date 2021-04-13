@@ -119,7 +119,7 @@ Content-ID: CP4I_on_Azure_Installation_Status
                                     <tr>
                                         <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/cloud\" target=\"_blank\"><img src=\"https://avatars.githubusercontent.com/u/7284885?s=200&v=4\" width=\"37\" height=\"37\" alt=\"IBM Cloud\" border=\"0\" /></a></td>
                                         <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.openshift.com\" target=\"_blank\"><img src=\"https://avatars.githubusercontent.com/u/792337?s=200&v=4\" width=\"37\" height=\"37\" alt=\"Red Hat Openshift\" border=\"0\" /></a></td>
-                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/in-en/cloud/cloud-pak-for-integration\" target=\"_blank\"><img src=\"https://www.oss-group.co.nz/hs-fs/hubfs/IBM%20Cloud%20Paks%20Icons/IBM%20Cloud%20Paks%2003%20Integration.png?width=177&name=IBM%20Cloud%20Paks%2003%20Integration.png\" width=\"33\" height=\"33\" alt=\"Red Hat Openshift\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/in-en/cloud/cloud-pak-for-integration\" target=\"_blank\"><img src=\"https://www.oss-group.co.nz/hs-fs/hubfs/IBM%20Cloud%20Paks%20Icons/IBM%20Cloud%20Paks%2003%20Integration.png?width=177&name=IBM%20Cloud%20Paks%2003%20Integration.png\" width=\"33\" height=\"33\" alt=\"IBM CP4I\" border=\"0\" /></a></td>
                                     </tr>
                                 </table>
                             </td> 
