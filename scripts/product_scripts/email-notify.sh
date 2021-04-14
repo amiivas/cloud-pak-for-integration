@@ -57,7 +57,7 @@ $(base64 -w 0 ${log_file})
   html_body="--upload-file - <<EOF
 From: IPM CP4I <noreply@ipmcp4i.com>
 To: ${notify_email}
-Subject: CP4I Installation Status - ${release_name} - ${install_status}
+Subject: CP4I Installation Status - ${release_name} - ${install_status^^}!
 Content-Type: multipart/related; boundary=\"Boundary\"
 
 --Boundary
@@ -117,9 +117,11 @@ Content-ID: CP4I_on_Azure_Installation_Status
                             <td valign=\"middle\" align=\"center\" >
                                 <table border=\"0\" cellspacing=\"0\" cellpadding=\"0\">
                                     <tr>
-                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/cloud\" target=\"_blank\"><img src=\"https://avatars.githubusercontent.com/u/7284885?s=200&v=4\" width=\"37\" height=\"37\" alt=\"IBM Cloud\" border=\"0\" /></a></td>
-                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.openshift.com\" target=\"_blank\"><img src=\"https://avatars.githubusercontent.com/u/792337?s=200&v=4\" width=\"37\" height=\"37\" alt=\"Red Hat Openshift\" border=\"0\" /></a></td>
-                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/in-en/cloud/cloud-pak-for-integration\" target=\"_blank\"><img src=\"https://www.oss-group.co.nz/hs-fs/hubfs/IBM%20Cloud%20Paks%20Icons/IBM%20Cloud%20Paks%2003%20Integration.png?width=177&name=IBM%20Cloud%20Paks%2003%20Integration.png\" width=\"33\" height=\"33\" alt=\"IBM CP4I\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/cloud\" target=\"_blank\"><img title=\"IBM Cloud\" alt=\"IBM Cloud\" src=\"https://avatars.githubusercontent.com/u/7284885?s=200&v=4\" width=\"37\" height=\"37\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.openshift.com\" target=\"_blank\"><img title=\"Red Hat Openshift\" alt=\"Red Hat Openshift\" src=\"https://avatars.githubusercontent.com/u/792337?s=200&v=4\" width=\"37\" height=\"37\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/in-en/cloud/cloud-pak-for-integration\" target=\"_blank\"><img title=\"Cloud Pak For Integration\" alt=\"Cloud Pak For Integration\" src=\"https://www.oss-group.co.nz/hs-fs/hubfs/IBM%20Cloud%20Paks%20Icons/IBM%20Cloud%20Paks%2003%20Integration.png\" width=\"33\" height=\"33\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.ibm.com/\" target=\"_blank\"><img title=\"IBM\" alt=\"IBM\" src=\"https://cybersecuritysummit.co.uk/wp-content/uploads/2020/06/IBM-logo.png\" width=\"39\" height=\"39\" border=\"0\" /></a></td>
+                                        <td width=\"37\" style=\"text-align: center; padding: 0 10px 0 10px;\"><a href=\"https://www.cognizant.com/\" target=\"_blank\"><img title=\"Cognizant Technology Solutions\" alt=\"Cognizant Technology Solutions\" src=\"https://digileaders.com/wp-content/uploads/2018/08/Cognizant.png\" width=\"87\" height=\"37\" border=\"0\" ></a></td>
                                     </tr>
                                 </table>
                             </td> 
