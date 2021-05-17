@@ -96,14 +96,10 @@ Content-ID: CP4I_on_Azure_Installation_Status
                     <!--[if (gte mso 9)|(IE)]> <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"width:660px; height:0;\"><tr><td></td></tr></table> <![endif]-->
                     <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" style=\"min-width: 100%;\">
                         <tr>
-                            <td style=\"padding: 0 35px; background: linear-gradient(90deg, #0071c5 50%, #002b4b 100%);\">
+                            <td style=\"padding: 15px 0 0 35px; background: linear-gradient(90deg, #003b68 20%, #171717 100%);\">
                                 <table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" width=\"100%\" style=\"min-height:45px;\" class=\"responsive-table\">
-                                    <tr>
-                                        <td><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"logo\"><tr><td><a href=\"https://portal.azure.com\" target=\"_blank\"><img src=\"https://azure.github.io/azure-sdk/images/azure-icon.png\" width=\"50\" height=\"50\" alt=\"Azure\" class=\"img-block\"/></a></td><td style=\"padding: 0 5px 2px 9px; text-align: left; color: #fff; font-size: 22px; font-weight: 400;\">Azure</td></tr></table></td>
-                                    </tr>
-                                    <tr>
-                                        <td align=\"center\" valign=\"middle\" style=\"padding: 5px 0 25px 0; font-size: x-large;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #fff;\">Cloud Pak For Integration</td>
-                                    </tr>
+                                    <tr><td><table border=\"0\" cellpadding=\"0\" cellspacing=\"0\" class=\"logo\"><tr><td><a href=\"https://portal.azure.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/DauthjanCTS/cloud-pak-for-integration/main/Azure_NewStyle.png\" width=\"170\" height=\"170\" alt=\"Azure\" class=\"img-block\"/></a></td></tr></table></td></tr>
+                                    <tr><td align=\"center\" valign=\"middle\" style=\"padding: 5px 0 25px 0; font-size: x-large;font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color: #fff;\">Cloud Pak For Integration</td></tr>
                                 </table>
                             </td>
                         </tr>
