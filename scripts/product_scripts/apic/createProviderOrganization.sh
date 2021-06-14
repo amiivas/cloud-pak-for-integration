@@ -10,6 +10,7 @@ export org=$7
 export catalog=$8
 export user=$9
 export password=${10}
+export sendgridPassword=${11}
 
 echo "Attempting to login $OPENSHIFTUSER to https://api.${cluster_name}.${domain_name}:6443 "
 oc login "https://api.${cluster_name}.${domain_name}:6443" -u $oc_username -p $oc_password --insecure-skip-tls-verify=true
@@ -139,7 +140,7 @@ host: smtp.sendgrid.net
 port: 587
 credentials:
   username: apikey
-  password: SG.Q2zQUTXTTcGqF6iTzhtVXA.V18213X6iHyHHbnMdJ3GoHW040zXkx9uQzkdv6qMTVk
+  password: ${sendgridPassword}
 EOF
 
 
