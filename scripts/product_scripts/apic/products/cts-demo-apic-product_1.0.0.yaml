@@ -1,0 +1,30 @@
+info:
+  version: 1.0.0
+  title: CTS Demo APIC Project
+  name: cts-demo-apic-project
+  summary: For demo purpose
+gateways:
+  - datapower-gateway
+plans:
+  default-plan:
+    rate-limits:
+      default:
+        value: 100/1hour
+    title: Default Plan
+    description: Default Plan
+    approval: false
+apis:
+  cts-demo-apic-api1.0.0:
+    $ref: cts-demo-apic-api_1.0.0.yaml
+visibility:
+  view:
+    type: public
+    orgs: []
+    tags: []
+    enabled: true
+  subscribe:
+    type: authenticated
+    orgs: []
+    tags: []
+    enabled: true
+product: 1.0.0

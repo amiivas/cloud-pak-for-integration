@@ -1,0 +1,122 @@
+swagger: '2.0'
+info:
+  title: CTS Demo APIC API
+  x-ibm-name: cts-demo-apic-api
+  version: 1.0.0
+  description: >-
+    An API to demonstrate a successful deployment of API Connect on Cloud Pak
+    for Integration on public cloud.
+schemes:
+  - https
+basePath: /v1
+produces:
+  - application/json
+security:
+  - {}
+securityDefinitions:
+  clientID:
+    type: apiKey
+    in: header
+    name: X-IBM-Client-Id
+x-ibm-configuration:
+  cors:
+    enabled: true
+  gateway: datapower-gateway
+  type: rest
+  phase: realized
+  enforced: true
+  testable: true
+  assembly:
+    execute:
+      - gatewayscript:
+          version: 1.0.0
+          title: gatewayscript
+          source: >-
+            session.output.write('<html><body><div style="display:
+            inline-block;position: fixed;top: 0;bottom: 0;left: 0;right:
+            0;width: 400px;height: 200px;margin: auto;"><h2>Welcome To API
+            Connect !! </h2> <br> <h4> Platform : </h4> Cloud Pak for
+            Integration on Azure.</div></body></html>');
+
+            apim.output('text/html');
+      - set-variable:
+          version: 1.0.0
+          title: set-variable
+          actions:
+            - set: 'var://service/mpgw/skip-backside'
+              value: 0
+  properties:
+    target-url:
+      value: 'http://example.com/operation-name'
+      description: The URL of the target service
+      encoded: false
+  application-authentication:
+    certificate: false
+paths:
+  /demo:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      description: Loopback operation providing a static response
+      consumes: []
+      produces: []
+  /ace:
+    get:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    put:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    post:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    delete:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    options:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    head:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []
+    patch:
+      responses:
+        '200':
+          description: success
+          schema:
+            type: string
+      consumes: []
+      produces: []

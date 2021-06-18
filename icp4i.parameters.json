@@ -1,0 +1,150 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "_artifactsLocation": {
+            "value": "https://raw.githubusercontent.com/amiivas/cloud-pak-for-integration/main/"
+        },
+        "_artifactsLocationSasToken": {
+            "value": ""
+        },
+        "aadClientId": {
+            "value": "05da0fdd-4b06-422c-93db-cba6860b7876"
+        },
+        "aadClientSecret": {
+            "value": "0bbo.J0y6-FWIKXMj8AX_98VNJ1r4k.H-I"
+        },
+        "adminUsername": {
+            "value": "azureuser"
+        },
+        "bastionVmSize": {
+            "value": "Standard_D4as_v4"
+        },
+        "sshPublicKey": {
+            "value": "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC2hvoJmT4XVwdPQFirsxnJdRJcmu9inWDYyYI4FbgsWqrQsh0t/l1fTutGJ8DimwTgN9HcDuMrAJhVf3e83/OrZWxoU7xaHkUeTuvnG3fPxiQWwRDRnrPE1w5vTGaLerE5NC2kx2lobvPHj3MeXYQZSFLNBwHvuTA1p6rR/MdLK7jP6g1MbqMAtyh0xZoBlJxopx5w/hA/bIr7PNXzYWwz+Lh4ZpImcHp+XX2vHfQ+5wY3dRUFE7GkTBXhWIeEZOoDo3A4f46iMMJxTffgIZaGV/BiloWHoyprst4dFeLz9KRPSnSjKGI/7PcScMsKvJtvQhDVuUwH/nWRygQ/pswF azureuser@cloudpak-bastion-vm"
+        },
+        "masterInstanceCount": {
+            "value": 3
+        },
+        "workerInstanceCount": {
+            "value": 3
+        },
+        "masterVmSize": {
+            "value": "Standard_D4as_v4"
+        },
+        "workerVmSize": {
+            "value": "Standard_D16as_v4"
+        },
+        "newOrExistingNetwork": {
+            "value": "new"
+        },
+        "virtualNetworkName": {
+            "value": "icp-auto-vnet"
+        },
+        "virtualNetworkCIDR": {
+            "value": ["10.0.4.0/22"]
+        },
+        "masterSubnetName": {
+            "value": "masterSubnet"
+        },
+        "masterSubnetPrefix": {
+            "value": "10.0.5.0/24"
+        },
+        "workerSubnetName": {
+            "value": "workerSubnet"
+        },
+        "workerSubnetPrefix": {
+            "value": "10.0.6.0/24"
+        },
+        "bastionSubnetName": {
+            "value": "bastionSubnet"
+        },
+        "bastionSubnetPrefix": {
+            "value": "10.0.4.0/27"
+        },
+        "singleZoneOrMultiZone": {
+            "value": "az"
+        },
+        "dnsZone": {
+            "value": "cloudpak-ipm.com"
+        },
+        "dnsZoneRG": {
+            "value": "icp4i-rg"
+        },
+        "installOpenshift": {
+            "value": "yes"
+        },
+        "pullSecret": {
+            "value": "Insert pull secret"
+        },
+        "clusterName": {
+            "value": "cp-cluster"
+        },
+        "openshiftUsername": {
+            "value": "kubeadmin"
+        },
+        "openshiftPassword": {
+            "value": "SnJTe-YYwcr-4S4Pe-4CjIw"
+        },
+        "enableFips": {
+            "value": false
+        },
+        "storageOption": {
+            "value": "none"
+        },
+        "enableNfsBackup": {
+            "value": false
+        },
+        "dataDiskSize": {
+            "value": 1024
+        },
+        "privateOrPublicEndpoints": {
+            "value": "public"
+        },
+        "projectName": {
+            "value": "icp"
+        },
+        "apiKey": {
+            "value": "eyJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJJQk0gTWFya2V0cGxhY2UiLCJpYXQiOjE1OTUyMzE0ODYsImp0aSI6Ijk3YjdiMjA4NjgyNzRlNzFiMTc4MDc2NTEwNWFmYTY5In0.ByK8bB5-at5rK-6KAYpwfV8G4Lez_6AALHViK7RUEig"
+        },
+        "storageAccountName": {
+            "value": "ctsicpstorageaccount"
+        },
+        "accountType": {
+            "value": "Standard_LRS"
+        },
+        "cloudPakLicenseAgreement": {
+            "value": "reject"
+        },
+        "platformNavigatorReplicas": {
+            "value": 1
+        },
+        "capabilityAPIConnect": {
+            "value": false
+        },
+        "capabilityAPPConnectDashboard": {
+            "value": false
+        },
+        "capabilityAPPConenctDesigner": {
+            "value": false
+        },
+        "capabilityAssetRepository": {
+            "value": false
+        },
+        "capabilityOperationsDashboard": {
+            "value": false
+        },
+        "runtimeMQ": {
+            "value": false
+        },
+        "runtimeKafka": {
+            "value": false
+        },
+        "runtimeAspera": {
+            "value": false
+        },
+        "runtimeDataPower": {
+            "value": false
+        }
+    }
+}
