@@ -573,6 +573,82 @@ EOF
   curl "${productInstallationPath}"/email-notify.sh -o email-notify.sh
   chmod +x email-notify.sh 
   sh email-notify.sh "${CLUSTERNAME}" "${DOMAINNAME}" "CloudPakForIntegrationv${cloudpakVersion}" "${namespace}" "${user_email}" "Completed" 
+  
+  if [[ "$capabilityOperationsDashboard" == "true" ]]
+  then
+    echo "INFO: Installing Capability Operations Dashboard";
+    sh ${deploymentScriptsPath}/release-tracing.sh -n ${namespace} -r operations-dashboard -f ${storageClass} -p -b gp2
+    wait_for_product OperationsDashboard operations-dashboard
+  fi
+
+  if [[ "$capabilityAPIConnect" == "True" ]]
+  then
+    echo "INFO: Installing Capability API Connect";
+    curl ${productInstallationPath}/install-apic.sh -o install-apic.sh
+    chmod +x install-apic.sh
+    sh install-apic.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${productInstallationPath}
+  fi
+
+  if [[ "$capabilityAPPConnectDashboard" == "True" ]]
+  then
+    echo "INFO: Installing Runtime App Connect Dashboard";
+    curl ${productInstallationPath}/install-ace-dashboard.sh -o install-ace-dashboard.sh
+    chmod +x install-ace-dashboard.sh
+    curl ${productInstallationPath}/install-ace-server.sh -o install-ace-server.sh
+    chmod +x install-ace-server.sh
+    sh install-ace-dashboard.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${user_email}
+  fi
+
+  if [[ "$capabilityAPPConenctDesigner" == "True" ]]
+  then
+    echo "INFO: Installing Capability App Connect Designer";
+    curl ${productInstallationPath}/install-ace-designer.sh -o install-ace-designer.sh
+    chmod +x install-ace-designer.sh
+    sh install-ace-designer.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace}
+  fi
+
+
+  if [[ "$capabilityAssetRepository" == "true" ]]
+  then
+    echo "INFO: Installing Capability Asset Repository";
+    curl ${productInstallationPath}/install-assetrepo.sh -o install-assetrepo.sh
+    chmod +x install-assetrepo.sh
+    sh install-assetrepo.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} latest ${storageAccountName}
+  fi
+
+  if [[ "$runtimeMQ" == "True" ]]
+  then
+    echo "INFO: Installing Runtime MQ";
+    curl ${productInstallationPath}/install-mq.sh -o install-mq.sh
+    chmod +x install-mq.sh
+    sh install-mq.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} "QM_CP4I" "SingleInstance" false true
+    #wait_for_product QueueManager mq
+  fi
+
+
+  if [[ "$runtimeKafka" == "True" ]]
+  then
+    echo "INFO: Installing Runtime Kafka..";
+    curl ${productInstallationPath}/install-kafka.sh -o install-kafka.sh
+    chmod +x install-kafka.sh
+    sh install-kafka.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} "kafka-dev"
+    #wait_for_product EventStreams kafka
+  fi
+
+  if [[ "$runtimeAspera" == "true" ]]
+  then
+    echo "INFO: Installing Runtime Aspera";
+    sh ${deploymentScriptsPath}/release-aspera.sh -n ${namespace} -r aspera -p -c ${storageClass} -k ${asperaKey}
+    wait_for_product IbmAsperaHsts aspera
+  fi
+
+  if [[ "$runtimeDataPower" == "true" ]]
+  then
+    echo "INFO: Installing Runtime DataPower";
+    sh ${deploymentScriptsPath}/release-datapower.sh -n ${namespace} -r datapower -p -a admin
+    wait_for_product DataPowerService datapower
+  fi
+
 }
 
 install
