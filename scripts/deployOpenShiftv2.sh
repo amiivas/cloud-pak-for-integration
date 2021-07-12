@@ -59,6 +59,7 @@ then
 	echo "Skipping installation of softwares on bastion node"
 else
 	# Grow Root File System
+	yum install epel-release -y
 	yum -y install cloud-utils-growpart.noarch
 	echo $(date) " - Grow Root FS"
 
