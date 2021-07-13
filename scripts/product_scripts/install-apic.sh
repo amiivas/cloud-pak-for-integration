@@ -10,6 +10,45 @@ export productInstallationPath=$6
 release_name="apic"
 echo "Release Name:" ${release_name}
 
+function wait_for_product {
+  type=${1}
+  release_name=${2}
+  NAMESPACE=${3}
+    time=0
+    status=false;
+  while [[ "$status" == false ]]; do
+        currentStatus="$(oc get "${type}" -n "${NAMESPACE}" "${release_name}" -o json | jq -r '.status.conditions[] | select(.type=="Ready").status')";
+        if [ "$currentStatus" == "True" ]
+        then
+          status=true
+        fi
+
+    if [ "$status" == false ]
+    then
+        currentStatus="$(oc get "${type}" -n "${NAMESPACE}" "${release_name}" -o json | jq -r '.status.phase')"
+
+        if [ "$currentStatus" == "Ready" ] || [ "$currentStatus" == "Running" ] || [ "$currentStatus" == "Succeeded" ]
+        then
+          status=true
+        fi
+    fi
+
+    echo "INFO: The ${type} status: $currentStatus"  
+    if [ "$status" == false ]; then
+      if [ $time -gt $maxWaitTime ]; then
+        echo "ERROR: Exiting installation ${type}  object is not ready"
+        return 1
+      fi
+    
+      echo "INFO: Waiting for ${type} object to be ready. Waited ${time} second(s)."
+  
+      time=$((time + 5))
+      sleep 5
+    fi
+  done
+}
+
+
 echo "Logging to Openshift - https://api.${cluster_name}.${domain_name}:6443 .."
 var=0
 oc login "https://api.${cluster_name}.${domain_name}:6443" -u "$openshift_user" -p "$openshift_password" --insecure-skip-tls-verify=true
@@ -51,17 +90,19 @@ while [[ apic -eq 0 ]]; do
       		exit 1
     	fi
 	
-	count=$(oc get pods -n ${namespace} | grep ${release_name} | wc -l)
-	resp=$?
-	if [[ count -ne 35 ]]; then
-		echo -e "Pods are still getting created for ${release_name} Waiting.."
-		time=$((time + 1))
-		sleep 60
-	else
-    		echo "API Connect Installation successful.."
-		apic=1;
-	fi
-    
+	
+	
+	wait_for_product AnalyticsCluster "${release_name}" "${namespace}"
+	wait_for_product GatewayCluster "${release_name}" "${namespace}"
+	wait_for_product PortalCluster "${release_name}" "${namespace}"
+	wait_for_product ManagementCluster "${release_name}" "${namespace}"
+	
+	echo "INFO: Waiting for APIConnectCluster to be in Ready state .."
+	wait_for_product APIConnectCluster "${release_name}" "${namespace}"
+	
+	echo "API Connect Installation successful.."
+	apic=1;
+	
     if [[ apic -eq 1 ]]; then
     	curl ${productInstallationPath}/apic/createProviderOrganization.sh -o create-provider-org.sh
 	curl ${productInstallationPath}/apic/publishProducts.sh -o publish-products.sh
