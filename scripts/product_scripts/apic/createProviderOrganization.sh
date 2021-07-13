@@ -139,7 +139,7 @@ host: smtp.sendgrid.net
 port: 587
 credentials:
   username: apikey
-  password: SG.Q2zQUTXTTcGqF6iTzhtVXA.V18213X6iHyHHbnMdJ3GoHW040zXkx9uQzkdv6qMTVk
+  password: 12345
 EOF
 
 
