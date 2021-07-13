@@ -33,8 +33,10 @@ spec:
   license:
     accept: true
     use: nonproduction
-  profile: n3xc4.m16
-  version: 10.0.1.0
+    license: L-RJON-BZ5LMW
+  profile: n1xc10.m48
+  version: 10.0.2.0
+  storageClassName: ocs-storagecluster-ceph-rbd
   gateway:
     apicGatewayServiceV5CompatibilityMode: true
 EOF
