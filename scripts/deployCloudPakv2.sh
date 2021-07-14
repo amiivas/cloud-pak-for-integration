@@ -547,7 +547,7 @@ EOF
   create_subscription "${namespace}" "ibm-operator-catalog" "datapower-operator" "v1.3"
   create_subscription "${namespace}" "ibm-operator-catalog" "ibm-appconnect" "v1.4"
   create_subscription "${namespace}" "ibm-operator-catalog" "ibm-eventstreams" "v2.3"
-  #create_subscription ${namespace} "ibm-operator-catalog" "ibm-mq" "v1.5"
+  create_subscription ${namespace} "ibm-operator-catalog" "ibm-mq" "v1.5"
   create_subscription "${namespace}" "ibm-operator-catalog" "ibm-integration-asset-repository" "v1.2"
   # Apply the subscription for navigator. This needs to be before apic so apic knows it's running in cp4i
   create_subscription "${namespace}" "ibm-operator-catalog" "ibm-integration-platform-navigator" "v4.2"
@@ -586,7 +586,7 @@ EOF
     echo "INFO: Installing Capability API Connect";
     curl ${productInstallationPath}/install-apic.sh -o install-apic.sh
     chmod +x install-apic.sh
-    sh install-apic.sh ${CLUSTERNAME} ${DOMAINNAME} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${namespace} ${productInstallationPath}
+    sh install-apic.sh "${CLUSTERNAME}" "${DOMAINNAME}" "${OPENSHIFTUSER}" "${OPENSHIFTPASSWORD}" "${namespace}" "${productInstallationPath}" "${user_email}"
   fi
 
   if [[ "$capabilityAPPConnectDashboard" == "True" ]]
