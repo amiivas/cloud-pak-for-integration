@@ -6,6 +6,7 @@ export openshift_user=$3
 export openshift_password=$4
 export namespace=$5
 export productInstallationPath=$6
+export user_email=$7
 
 release_name="apic"
 echo "Release Name:" ${release_name}
@@ -89,9 +90,9 @@ while [[ apic -eq 0 ]]; do
         ptl_release_name=${release_name}
         mgmt_release_name=${release_name}
 	apic_release_name=${release_name}
-	wait_for_product GatewayCluster "${gw_release_name}-gw" "${namespace}"
-	wait_for_product PortalCluster "${ptl_release_name}-ptl" "${namespace}"
 	wait_for_product ManagementCluster "${mgmt_release_name}-mgmt" "${namespace}"
+	wait_for_product PortalCluster "${ptl_release_name}-ptl" "${namespace}"
+	wait_for_product GatewayCluster "${gw_release_name}-gw" "${namespace}"
 	
 	echo "INFO: Waiting for APIConnectCluster to be in Ready state .."
 	wait_for_product APIConnectCluster "${apic_release_name}" "${namespace}"
@@ -102,7 +103,7 @@ while [[ apic -eq 0 ]]; do
     echo "INFO: Downloading email script...";
     curl "${productInstallationPath}"/email-notify.sh -o email-notify.sh
     chmod +x email-notify.sh 
-    sh email-notify.sh "${cluster_name}" "${domain_name}" "CloudPakForIntegrationv${cloudpakVersion}" "${namespace}" "amit.srivastav@cognizant.com" "Completed" 
+    sh email-notify.sh "${cluster_name}" "${domain_name}" "API Connect" "${namespace}" "${user_email}" "Completed" 
     
     if [[ apic -eq 1 ]]; then
     	curl ${productInstallationPath}/apic/createProviderOrganization.sh -o create-provider-org.sh
