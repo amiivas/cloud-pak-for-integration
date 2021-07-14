@@ -96,13 +96,7 @@ else
 	echo $(date) " - Install httpd-tools"
 	yum install -y httpd-tools
 	echo $(date) " - Install httpd-tools Complete"
-	
-	echo $(date) " -Install apic toolkit"
-	runuser -l $SUDOUSER -c "wget $ARTIFACTSLOCATION/toolkit-linux_10.0.3.0.tgz$ARTIFACTSTOKEN"
-  	runuser -l $SUDOUSER -c "tar -xvf toolkit-linux_10.0.3.0.tgz"
-	runuser -l $SUDOUSER -c "chmod +x apic-slim"
-	runuser -l $SUDOUSER -c "mv apic-slim apic"
-	
+			
 fi
 
 echo $(date) " - Download Binaries"
