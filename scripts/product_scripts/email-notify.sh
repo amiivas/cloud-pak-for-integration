@@ -32,11 +32,11 @@ if [[ ${notify_email} =~ $email_regex ]] ; then
   curl_cmd="curl --ssl --url ${SMTP_SERVER} --user ${SMTP_USER}:${SMTP_PASS} --mail-from ${MAIL_FROM}"
 
   # setting the status_statement based on install_status which will be triggered in the mail body
-  STATEMENT="Installation of ${release_name} completed successfully! Your ${release_name} in ${cluster_name} is ready to use."
+  STATEMENT="Installation of ${release_name} completed successfully on $(date '+%m/%d/%Y') $(date +"%r %Z")! Your ${release_name} in ${cluster_name} is ready to use."
   STATUS_LOGO="&#9989;"
   STATEMENT_COLOR="#02af02"
   attachment_section=""
-  if [[ "$install_status" != "successful" && "$install_status" != "completed" ]]; then
+  if [[ "${install_status,,}" != "successful" && "${install_status,,}" != "completed" ]]; then
     STATEMENT="We ran into a problem while ${release_name}. Please look for the logs which may specify failure reasons."
     STATEMENT_COLOR="#ca1111"
     STATUS_LOGO="&#10060;"
