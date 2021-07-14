@@ -103,7 +103,7 @@ while [[ apic -eq 0 ]]; do
     echo "INFO: Downloading email script...";
     curl "${productInstallationPath}"/email-notify.sh -o email-notify.sh
     chmod +x email-notify.sh 
-    sh email-notify.sh "${cluster_name}" "${domain_name}" "API Connect" "${namespace}" "${user_email}" "Completed" 
+    sh email-notify.sh "${cluster_name}" "${domain_name}" "API Connect" "${namespace}" "${user_email}"  "completed" ""
     
     if [[ apic -eq 1 ]]; then
     	curl ${productInstallationPath}/apic/createProviderOrganization.sh -o create-provider-org.sh
