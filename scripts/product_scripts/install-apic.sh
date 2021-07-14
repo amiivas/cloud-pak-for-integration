@@ -99,6 +99,11 @@ while [[ apic -eq 0 ]]; do
 	echo "API Connect Installation successful.."
 	apic=1;
 	
+    echo "INFO: Downloading email script...";
+    curl "${productInstallationPath}"/email-notify.sh -o email-notify.sh
+    chmod +x email-notify.sh 
+    sh email-notify.sh "${cluster_name}" "${domain_name}" "CloudPakForIntegrationv${cloudpakVersion}" "${namespace}" "amit.srivastav@cognizant.com" "Completed" 
+    
     if [[ apic -eq 1 ]]; then
     	curl ${productInstallationPath}/apic/createProviderOrganization.sh -o create-provider-org.sh
 	curl ${productInstallationPath}/apic/publishProducts.sh -o publish-products.sh
