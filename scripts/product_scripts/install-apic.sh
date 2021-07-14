@@ -37,8 +37,8 @@ function wait_for_product {
     
       echo "INFO: Waiting for ${type} object to be ready. Waited ${time} second(s)."
   
-      time=$((time + 5))
-      sleep 5
+      time=$((time + 60))
+      sleep 60
     fi
   done
 }
