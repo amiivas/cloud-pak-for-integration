@@ -572,7 +572,7 @@ EOF
   echo "INFO: Downloading email script...";
   curl "${productInstallationPath}"/email-notify.sh -o email-notify.sh
   chmod +x email-notify.sh 
-  sh email-notify.sh "${CLUSTERNAME}" "${DOMAINNAME}" "CloudPakForIntegrationv${cloudpakVersion}" "${namespace}" "${user_email}" "Completed" 
+  sh email-notify.sh "${CLUSTERNAME}" "${DOMAINNAME}" "CloudPakForIntegrationv${cloudpakVersion}" "${namespace}" "${user_email}" "completed" ""
   
   if [[ "$capabilityOperationsDashboard" == "true" ]]
   then
