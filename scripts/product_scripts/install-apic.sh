@@ -9,29 +9,23 @@ export productInstallationPath=$6
 
 release_name="apic"
 echo "Release Name:" ${release_name}
+maxWaitTime=3600
 
 function wait_for_product {
   type=${1}
   release_name=${2}
   NAMESPACE=${3}
-    time=0
-    status=false;
+  time=0
+  status=false;
   while [[ "$status" == false ]]; do
-        currentStatus="$(oc get "${type}" -n "${NAMESPACE}" "${release_name}" -o json | jq -r '.status.conditions[] | select(.type=="Ready").status')";
-        if [ "$currentStatus" == "True" ]
-        then
-          status=true
-        fi
+        
+	currentStatus="$(oc get "${type}" -n "${NAMESPACE}" "${release_name}" -o json | jq -r '.status.phase')"
 
-    if [ "$status" == false ]
-    then
-        currentStatus="$(oc get "${type}" -n "${NAMESPACE}" "${release_name}" -o json | jq -r '.status.phase')"
-
-        if [ "$currentStatus" == "Ready" ] || [ "$currentStatus" == "Running" ] || [ "$currentStatus" == "Succeeded" ]
-        then
-          status=true
-        fi
-    fi
+	if [ "$currentStatus" == "Ready" ] || [ "$currentStatus" == "Running" ] || [ "$currentStatus" == "Succeeded" ]
+	then
+	  status=true
+	fi
+    
 
     echo "INFO: The ${type} status: $currentStatus"  
     if [ "$status" == false ]; then
@@ -91,14 +85,16 @@ while [[ apic -eq 0 ]]; do
     	fi
 	
 	
-	
-	wait_for_product AnalyticsCluster "${release_name}" "${namespace}"
-	wait_for_product GatewayCluster "${release_name}" "${namespace}"
-	wait_for_product PortalCluster "${release_name}" "${namespace}"
-	wait_for_product ManagementCluster "${release_name}" "${namespace}"
+        gw_release_name=${release_name}	
+        ptl_release_name=${release_name}
+        mgmt_release_name=${release_name}
+	apic_release_name=${release_name}
+	wait_for_product GatewayCluster "${gw_release_name}-gw" "${namespace}"
+	wait_for_product PortalCluster "${ptl_release_name}-ptl" "${namespace}"
+	wait_for_product ManagementCluster "${mgmt_release_name}-mgmt" "${namespace}"
 	
 	echo "INFO: Waiting for APIConnectCluster to be in Ready state .."
-	wait_for_product APIConnectCluster "${release_name}" "${namespace}"
+	wait_for_product APIConnectCluster "${apic_release_name}" "${namespace}"
 	
 	echo "API Connect Installation successful.."
 	apic=1;
@@ -114,7 +110,7 @@ while [[ apic -eq 0 ]]; do
 	curl ${productInstallationPath}/apic/products/cts-demo-apic-product_1.0.0.yaml -o cts-demo-apic-product_1.0.0.yaml
 	cd ../
     	chmod +x create-provider-org.sh publish-products.sh create-subscription.sh
-    	yes | sh create-provider-org.sh ${CLUSTERNAME} ${DOMAINNAME} ${namespace} ${OPENSHIFTUSER} ${OPENSHIFTPASSWORD} ${release_name}
+        yes | sh create-provider-org.sh ${cluster_name} ${domain_name} ${namespace} ${openshift_user} ${openshift_password} ${release_name}
     fi
 	
 	
