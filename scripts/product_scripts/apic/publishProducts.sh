@@ -62,3 +62,6 @@ do
    fi
 done
 
+echo "********* script completed ********"
+
+yes | sh create-subscription.sh ${cluster_name} ${domain_name} ${namespace} ${apic_release_name} ${org} ${user} ${password} ${apic_server}
