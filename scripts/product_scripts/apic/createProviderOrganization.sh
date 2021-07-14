@@ -150,11 +150,11 @@ echo "Setting Demo Mail Server .. "
 cat << EOF | /home/azureuser/apic mail-servers:create --org admin --server ${apic_server}  -
 title: demo-email-server
 name: demo-email-server
-host: smtp.sendgrid.net
-port: 587
+host: smtp.gmail.com
+port: 465
 credentials:
-  username: apikey
-  password: SG.Q2zQUTXTTcGqF6iTzhtVXA.V18213X6iHyHHbnMdJ3GoHW040zXkx9uQzkdv6qMTVk
+  username: ipm.cp4i@gmail.com
+  password: c7d4540b72c44a30a72ae9f698062488
 EOF
 
 
@@ -168,8 +168,8 @@ echo "Updating cloud settings with email server ... "
 cat << EOF > cloud_config.yaml
 mail_server_url: ${mail_server_url}
 email_sender:
-  name: /home/azureuser/apic Administrator
-  address: amitsrikiet@gmail.com
+  name: APIC Administrator
+  address: ipm.cp4i@gmail.com
 
 EOF
 
